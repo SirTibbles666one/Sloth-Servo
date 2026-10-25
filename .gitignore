@@ -1,0 +1,20 @@
+# build output
+build/
+.gradle/
+app/build/
+rust/bridge/target/
+*.apk
+*.aab
+*.zip
+
+# local machine
+local.properties
+.idea/
+*.iml
+.DS_Store
+
+# the native libraries are committed on purpose: a clone can run `gradle assembleRelease`
+# without installing Rust. Rebuild them with the commands in README.md when the crate changes.
+
+# apksigner leaves one of these beside every signed apk
+*.idsig

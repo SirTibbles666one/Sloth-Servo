@@ -1,0 +1,16 @@
+[package]
+name = "sloth_servo_bridge"
+version = "0.1.0"
+edition = "2021"
+description = "The Rust spine of Sloth Servo: everything that is not the UI lives behind this"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+jni = "0.21"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = "symbols"

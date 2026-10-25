@@ -1,0 +1,57 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.sloth.servo'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.sloth.servo"
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName "0.1-concept"
+        ndk {
+            // the phone is arm64; x86_64 is carried for an emulator that may never exist
+            abiFilters 'arm64-v8a', 'x86_64'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            // signed with the same keystore as Sloth, but a different applicationId, so it
+            // installs beside the browser instead of replacing it
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    sourceSets {
+        main {
+            // the .so files come out of cargo, not out of this build
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.14.1'
+}
